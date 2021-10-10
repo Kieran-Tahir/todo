@@ -4,29 +4,29 @@ import { screen, render } from '@testing-library/react'
 
 import App from './App'
 import store from '../store'
-import { fetchFruits } from '../actions'
+import { fetchTodos } from '../actions'
 
 jest.mock('../actions')
 
-fetchFruits.mockImplementation(() => () => {})
+fetchTodos.mockImplementation(() => () => {})
 
-test('page header includes fruit', () => {
+test('page header includes Todo', () => {
   render(<Provider store={store}><App /></Provider>)
   const heading = screen.getByRole('heading')
-  expect(heading.innerHTML).toMatch(/Fruit/)
+  expect(heading.innerHTML).toMatch(/Todo/)
 })
 
-test('renders an <li> for each fruit', () => {
-  const fruits = ['orange', 'persimmons', 'kiwi fruit']
+test('renders an <li> for each Todo', () => {
+  const todos = ['Code', 'Fish', 'Eat']
   jest.spyOn(store, 'getState')
-  store.getState.mockImplementation(() => ({ fruits }))
+  store.getState.mockImplementation(() => ({ todos }))
 
   render(<Provider store={store}><App /></Provider>)
   const li = screen.getAllByRole('listitem')
   expect(li).toHaveLength(3)
 })
 
-test('dispatches fetchFruits action', () => {
+test('dispatches fetchTodos action', () => {
   render(<Provider store={store}><App /></Provider>)
-  expect(fetchFruits).toHaveBeenCalled()
+  expect(fetchTodos).toHaveBeenCalled()
 })

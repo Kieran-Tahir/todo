@@ -1,19 +1,28 @@
-import { getFruits } from '../apis/fruits'
+import { getTodos } from '../apis/todos'
 
-export const SET_FRUITS = 'SET_FRUITS'
+export const SET_TODOS = 'SET_TODOS'
+export const ADD_TODO = 'ADD_TODO'
 
-export function setFruits (fruits) {
+export function setTodos (todos) {
   return {
-    type: SET_FRUITS,
-    fruits
+    type: SET_TODOS,
+    todos
   }
 }
 
-export function fetchFruits () {
+export function addTodo (todo) {
+  console.log('action dispatched: ', todo)
+  return {
+    type: ADD_TODO,
+    todo
+  }
+}
+
+export function fetchTodos () {
   return dispatch => {
-    return getFruits()
-      .then(fruits => {
-        dispatch(setFruits(fruits))
+    return getTodos()
+      .then(todos => {
+        dispatch(setTodos(todos))
         return null
       })
   }
