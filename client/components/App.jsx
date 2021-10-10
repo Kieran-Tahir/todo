@@ -1,29 +1,24 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
+import { Route } from 'react-router'
 
-import { fetchFruits } from '../actions'
+import AddTodo from './AddTodo'
+import TodoList from './TodoList'
 
-function App (props) {
-  useEffect(() => {
-    props.dispatch(fetchFruits())
-  }, [])
-
+function App () {
   return (
     <>
       <div className='app'>
-        <h1>Fullstack Boilerplate - with Fruits!</h1>
-        <ul>
-          {props.fruits.map(fruit => (
-            <li key={fruit}>{fruit}</li>
-          ))}
-        </ul>
+        <h1>Kierans Todo List</h1>
+        <Route exact path='/' component={TodoList} />
+        <Route exact path='/add' component={AddTodo} />
       </div>
     </>
   )
 }
 const mapStateToProps = (globalState) => {
   return {
-    fruits: globalState.fruits
+    todos: globalState.todos
   }
 }
 
