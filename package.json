@@ -10,14 +10,11 @@
     "start": "node server",
     "test": "jest",
     "test:watch": "jest --noStackTrace --watchAll",
-    "dev": "run-p dev:client dev:server",
-    "dev:client": "npm run webpack -- --watch",
+    "dev": "run-p dev:server",
     "dev:server": "nodemon --watch server server/index.js",
     "build": "run-p build:client build:server",
-    "build:client": "npm run webpack -- --mode production",
     "build:server": "npm run knex -- migrate:latest",
     "lint": "eslint --ext .js,.jsx .",
-    "webpack": "webpack --config ./client/webpack.config.js",
     "knex": "knex --knexfile ./server/db/knexfile.js"
   },
   "babel": {
@@ -40,6 +37,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "knex": "^0.21.12",
+    "mongodb": "^4.4.1",
     "pg": "^8.5.1",
     "superagent": "^6.1.0"
   },
